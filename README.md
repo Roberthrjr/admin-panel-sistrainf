@@ -22,6 +22,7 @@
 2. Navega hasta el directorio del proyecto.
 3. Instala las dependencias utilizando el siguiente comando:
 
+```bash
 npm install
 
 ## Uso
