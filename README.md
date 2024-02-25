@@ -21,15 +21,16 @@
 1. Clona este repositorio en tu máquina local.
 2. Navega hasta el directorio del proyecto.
 3. Instala las dependencias utilizando el siguiente comando:
-
 ```bash
 npm install
+```
 
 ## Uso
 
 1. Inicia el servidor de desarrollo con el siguiente comando:
-
+```bash
 npm run dev
+```
 
 2. Abre tu navegador web y ve a `http://localhost:[puerto]` para acceder al sistema.
 
