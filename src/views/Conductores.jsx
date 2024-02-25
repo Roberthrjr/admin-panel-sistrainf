@@ -40,9 +40,9 @@ export default function Conductores() {
             <table className="min-w-full bg-white">
                 <thead>
                     <tr>
-                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                        {/* <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Foto
-                        </th>
+                        </th> */}
                         <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Nombre
                         </th>
@@ -52,56 +52,59 @@ export default function Conductores() {
                         <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             DNI
                         </th>
-                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                        {/* <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Condición
-                        </th>
+                        </th> */}
                         <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Código Carné
                         </th>
-                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                        {/* <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Modalidad Servicio
-                        </th>
-                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                        </th> */}
+                        {/* <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Número Licencia
-                        </th>
+                        </th> */}
                         <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Fecha Emisión
                         </th>
                         <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Fecha Caducidad
                         </th>
-                        <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
+                        {/* <th className="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-600 uppercase tracking-wider">
                             Número Expediente
-                        </th>
+                        </th> */}
                         <th className="px-6 py-3 bg-gray-100">Opciones</th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {conductores.map((conductor) => (
                         <tr key={conductor.id}>
-                            <td className="px-6 py-4 whitespace-no-wrap">
+                            {/* <td className="px-6 py-4 whitespace-no-wrap">
                                 <img
                                     src={conductor.foto_conductor}
                                     alt="Foto del conductor"
                                     className="h-12 w-12 rounded-full"
                                 />
-                            </td>
+                            </td> */}
                             <td className="px-6 py-4 whitespace-no-wrap">{conductor.nombre_conductor}</td>
                             <td className="px-6 py-4 whitespace-no-wrap">{conductor.apellido_conductor}</td>
                             <td className="px-6 py-4 whitespace-no-wrap">{conductor.dni_conductor}</td>
-                            <td className="px-6 py-4 whitespace-no-wrap">{conductor.condicion_conductor}</td>
+                            {/* <td className="px-6 py-4 whitespace-no-wrap">{conductor.condicion_conductor}</td> */}
                             <td className="px-6 py-4 whitespace-no-wrap">{conductor.codigo_carné}</td>
-                            <td className="px-6 py-4 whitespace-no-wrap">{conductor.modalidad_servicio}</td>
-                            <td className="px-6 py-4 whitespace-no-wrap">{conductor.numero_licencia}</td>
+                            {/* <td className="px-6 py-4 whitespace-no-wrap">{conductor.modalidad_servicio}</td> */}
+                            {/* <td className="px-6 py-4 whitespace-no-wrap">{conductor.numero_licencia}</td> */}
                             <td className="px-6 py-4 whitespace-no-wrap">{conductor.fecha_emision}</td>
                             <td className="px-6 py-4 whitespace-no-wrap">{conductor.fecha_caducidad}</td>
-                            <td className="px-6 py-4 whitespace-no-wrap">{conductor.numero_expediente}</td>
-                            <td className="px-6 py-4 whitespace-no-wrap">
+                            {/* <td className="px-6 py-4 whitespace-no-wrap">{conductor.numero_expediente}</td> */}
+                            <td className="px-6 py-4 text-center whitespace-no-wrap">
                                 <Link className="bg-yellow-500 text-white hover:bg-yellow-600 px-2 py-1 rounded-full">
                                     <i className="fa-solid fa-pen"></i>
                                 </Link>
                                 <Link className="bg-red-500 text-white hover:bg-red-600 px-2 py-1 rounded-full">
                                     <i className="fa-solid fa-trash"></i>
+                                </Link>
+                                <Link className="bg-blue-500 text-white hover:bg-blue-600 px-2 py-1 rounded-full">
+                                    <i className="fa-solid fa-eye"></i>
                                 </Link>
                             </td>
                         </tr>
