@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export default function NotFound() {
+export default function NotFound({ mensaje }) {
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg text-center">
@@ -14,7 +14,7 @@ export default function NotFound() {
                     className="mx-auto h-40"
                 />
                 <p className="text-lg text-gray-600 mt-6">
-                    La página que buscas no se encuentra.
+                    {mensaje}
                 </p>
                 <Link
                     to="/"

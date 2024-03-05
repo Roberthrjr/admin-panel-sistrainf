@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import useData from "../hooks/useAxios";
 import TablaConductores from "../components/TablaConductores";
+import Cargando from "../components/Cargando";
+import NotFound from "../components/NotFound";
 
 export default function Conductores() {
 
     const { data, loading, error, refetch } = useData(`${import.meta.env.VITE_ENDPOINT_BASE}/CarneConductor`);
-    // console.log(`${import.meta.env.VITE_ENDPOINT_BASE}/CarneConductor`);
 
-    if (loading) return <p>Cargando...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <Cargando />;
+    if (error) return <NotFound mensaje={'Parece que no podemos recolectar los datos del servidor, espere un momento y vuelva a ingresar'} />;
 
     return (
         <div className="overflow-x-auto">
