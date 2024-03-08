@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import uploadFile from "../services/storageService";
 import Cargando from "../components/Cargando";
 import Swal from "sweetalert2";
@@ -7,7 +7,7 @@ import useData from "../hooks/useAxios";
 
 let imagenConductor;
 
-export default function AgregarConductor() {
+export default function EditarConductor() {
   const [formData, setFormData] = useState({
     nombre_conductor: "",
     apellido_conductor: "",
@@ -23,8 +23,9 @@ export default function AgregarConductor() {
     foto_conductor: "",
   });
 
-  const { addData, loading, error } = useData(
-    `${import.meta.env.VITE_ENDPOINT_BASE}/CarneConductor`
+  const { id } = useParams();
+  const { data, loading, error, updateData } = useData(
+    `${import.meta.env.VITE_ENDPOINT_BASE}/CarneConductor/${id}`
   );
 
   const navigate = useNavigate();
@@ -33,8 +34,31 @@ export default function AgregarConductor() {
     navigate("/conductores");
   };
 
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        nombre_conductor: data.nombre_conductor,
+        apellido_conductor: data.apellido_conductor,
+        dni_conductor: data.dni_conductor,
+        condicion_conductor: data.condicion_conductor,
+        codigo_carne: data.codigo_carne,
+        modalidad_servicio: data.modalidad_servicio,
+        numero_licencia: data.numero_licencia,
+        fecha_emision: data.fecha_emision,
+        fecha_caducidad: data.fecha_caducidad,
+        numero_expediente: data.numero_expediente,
+        estado_carne: data.estado_carne,
+        foto_conductor: data.foto_conductor,
+      });
+    }
+  }, [data]);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const copyStateForm = {
+      ...formData,
+      [e.target.name]: e.target.value,
+    };
+    setFormData(copyStateForm);
   };
 
   const handleFileChange = (e) => {
@@ -130,6 +154,7 @@ export default function AgregarConductor() {
           "El número de expediente debe contener solo números, letras y guiones."
         );
       }
+      useR;
 
       // Validar las fechas
       const fechaEmision = new Date(formData.fecha_emision);
@@ -167,7 +192,8 @@ export default function AgregarConductor() {
 
       uploadFile(imagenConductor, "conductores")
         .then((response) => {
-          return addData({ ...formData, foto_conductor: response });
+          console.log(response);
+          return updateData(id, { ...formData, foto_conductor: response });
         })
         .then(() => {
           Swal.fire({
@@ -186,7 +212,6 @@ export default function AgregarConductor() {
       console.log(error);
     }
   };
-
   if (loading) return <Cargando />;
   if (error)
     return (
@@ -200,12 +225,9 @@ export default function AgregarConductor() {
   return (
     <div className="bg-gray-100 p-5">
       <div className=" mx-auto my-auto bg-white shadow-md rounded-lg overflow-hidden">
-        <form
-          onSubmit={handleSubmit}
-          className="p-6 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
-        >
+        <form className="p-6 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
           <h2 className="text-xl font-semibold mb-4 col-span-full">
-            Agregar Nuevo Conductor
+            Editar Conductor
             <i className="ml-2 fa-solid fa-user-plus"></i>
           </h2>
           <div className="mb-4">
@@ -223,6 +245,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Nombre del conductor"
+              required
             />
           </div>
           <div className="mb-4">
@@ -240,6 +263,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Apellido del conductor"
+              required
             />
           </div>
           <div className="mb-4">
@@ -257,6 +281,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Número de DNI"
+              required
             />
           </div>
 
@@ -275,6 +300,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Condición del conductor"
+              required
             />
           </div>
 
@@ -293,6 +319,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Código del carné"
+              required
             />
           </div>
 
@@ -311,6 +338,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Modalidad del servicio"
+              required
             />
           </div>
 
@@ -329,6 +357,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Número de licencia"
+              required
             />
           </div>
 
@@ -346,6 +375,7 @@ export default function AgregarConductor() {
               value={formData.fecha_emision}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
+              required
             />
           </div>
 
@@ -363,6 +393,7 @@ export default function AgregarConductor() {
               value={formData.fecha_caducidad}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
+              required
             />
           </div>
 
@@ -381,6 +412,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Número de expediente"
+              required
             />
           </div>
 
@@ -399,6 +431,7 @@ export default function AgregarConductor() {
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
               placeholder="Estado del carné"
+              required
             />
           </div>
 
@@ -416,14 +449,19 @@ export default function AgregarConductor() {
               // value={formData.foto_conductor}
               onChange={handleFileChange}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-1 focus:ring-inset focus:ring-indigo-600"
+              required
             />
+            <p className="form-text">
+              Actualmente la imagen de este producto es:{" "}
+              {formData.foto_conductor}
+            </p>
           </div>
 
-          <div className="flex items-center justify-items-start">
+          <div className="flex items-center justify-start">
             <button
               type="submit"
-              className="bg-blue-950 hover:bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline"
               onClick={handleSubmit}
+              className="bg-blue-950 hover:bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded focus:outline-none focus:shadow-outline"
             >
               Guardar Conductor
             </button>

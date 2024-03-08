@@ -38,10 +38,13 @@ const useData = (url, options = { method: 'get', data: null }) => {
 
     const updateData = async (id, updatedData) => {
         setLoading(true);
+        console.log(updatedData);
         try {
-            const response = await axios.put(`${url}/${id}`, updatedData);
-            setData(data.map(item => item.id === id ? response.data : item));
+            const response = await axios.put(`${url}`, updatedData);
+            //response.status === 200 ? console.log('Todo bien') : console.log('Algo salio mal');
+            setData(data.map(item => item.id_conductor === id ? response.data : item));
         } catch (err) {
+            console.log('Por aqui');
             setError(err);
         }
         setLoading(false);

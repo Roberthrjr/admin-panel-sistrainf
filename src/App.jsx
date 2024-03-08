@@ -5,6 +5,9 @@ import Conductores from "./views/Conductores";
 import AgregarConductor from "./views/AgregarConductor";
 import Vehiculos from "./views/Vehiculos";
 import NotFound from "./components/NotFound";
+import EditarConductor from "./views/EditarConductor";
+import Conductor from "./views/Conductor";
+import Consultas from "./views/Consultas";
 
 export default function App() {
   return (
@@ -15,8 +18,16 @@ export default function App() {
         <Route path="/conductores" element={<Conductores />} />
         <Route path="/vehiculos" element={<Vehiculos />} />
         <Route path="/agregar-conductor" element={<AgregarConductor />} />
-        <Route path="*" element={<NotFound mensaje={'La página que buscas no se encuentra.'} />} />
+        <Route path="/conductores/:id" element={<EditarConductor />} />
+        <Route path="/conductores/:id/ver" element={<Conductor />} />
+        <Route path="/consultas" element={<Consultas />} />
+        <Route
+          path="*"
+          element={
+            <NotFound mensaje={"La página que buscas no se encuentra."} />
+          }
+        />
       </Routes>
     </Router>
-  )
+  );
 }
