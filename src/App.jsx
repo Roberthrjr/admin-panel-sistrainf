@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Home from "./views/Home";
 import Conductores from "./views/Conductores";
 import AgregarConductor from "./views/AgregarConductor";
-import Vehiculos from "./views/Vehiculos";
 import NotFound from "./components/NotFound";
 import EditarConductor from "./views/EditarConductor";
 import Conductor from "./views/Conductor";
@@ -16,7 +15,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/conductores" element={<Conductores />} />
-        <Route path="/vehiculos" element={<Vehiculos />} />
         <Route path="/agregar-conductor" element={<AgregarConductor />} />
         <Route path="/conductores/:id" element={<EditarConductor />} />
         <Route path="/conductores/:id/ver" element={<Conductor />} />
